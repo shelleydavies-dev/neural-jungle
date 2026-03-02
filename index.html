@@ -31,8 +31,8 @@
       top: 50%;
       left: 55%;
       transform: translate(-50%, -52%);
-      width: 600px;
-      height: 520px;
+      width: 700px;
+      height: 600px;
     }
 
     .particle-cloud canvas { display: block; }
@@ -110,8 +110,8 @@
       }
       .enter-btn { bottom: 1.8rem; }
       .particle-cloud {
-        width: 340px;
-        height: 300px;
+        width: 360px;
+        height: 320px;
         left: 50%;
       }
     }
@@ -148,67 +148,38 @@
     var W, H;
     var particles = [];
     var connections = [];
-    var PARTICLE_COUNT = 450;
-    var CONNECTION_DIST = 35;
+    var firings = [];       // Active neuron firing pulses
+    var travellers = [];    // Particles travelling along connections
+    var PARTICLE_COUNT = 800;
+    var CONNECTION_DIST = 30;
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ------------------------------------------------
-       Brain silhouette (profile view, normalised 0-1)
-       Points trace clockwise from frontal-bottom
-       ------------------------------------------------ */
+    /* --- Brain silhouette (profile, normalised 0-1) --- */
     var brainOutline = [
-      // Frontal lobe bottom
-      [0.28, 0.62],
-      [0.22, 0.52],
-      [0.18, 0.42],
-      [0.17, 0.32],
-      // Frontal top
-      [0.20, 0.22],
-      [0.28, 0.14],
-      [0.38, 0.08],
-      // Crown
-      [0.48, 0.05],
-      [0.55, 0.06],
-      // Parietal
-      [0.65, 0.10],
-      [0.73, 0.18],
-      [0.78, 0.28],
-      // Occipital
-      [0.80, 0.40],
-      [0.78, 0.52],
-      [0.73, 0.60],
-      // Cerebellum junction
-      [0.70, 0.65],
-      // Cerebellum
-      [0.74, 0.70],
-      [0.76, 0.78],
-      [0.72, 0.84],
-      [0.64, 0.87],
-      // Brain stem
-      [0.56, 0.84],
-      [0.52, 0.90],
-      [0.48, 0.92],
-      [0.46, 0.88],
-      [0.44, 0.82],
-      // Temporal lobe
-      [0.40, 0.76],
-      [0.35, 0.70],
-      [0.30, 0.66]
+      [0.28,0.62],[0.22,0.52],[0.18,0.42],[0.17,0.32],
+      [0.20,0.22],[0.28,0.14],[0.38,0.08],
+      [0.48,0.05],[0.55,0.06],
+      [0.65,0.10],[0.73,0.18],[0.78,0.28],
+      [0.80,0.40],[0.78,0.52],[0.73,0.60],
+      [0.70,0.65],[0.74,0.70],[0.76,0.78],[0.72,0.84],[0.64,0.87],
+      [0.56,0.84],[0.52,0.90],[0.48,0.92],[0.46,0.88],[0.44,0.82],
+      [0.40,0.76],[0.35,0.70],[0.30,0.66]
     ];
 
     /* Fissure curves (internal brain folds) */
     var fissures = [
-      // Central sulcus
-      [[0.52, 0.10], [0.50, 0.22], [0.48, 0.35], [0.50, 0.48]],
-      // Lateral fissure
-      [[0.38, 0.48], [0.48, 0.50], [0.58, 0.52], [0.66, 0.56]],
-      // Frontal fold
-      [[0.25, 0.30], [0.32, 0.28], [0.40, 0.26], [0.45, 0.20]],
-      // Parietal fold
-      [[0.58, 0.15], [0.62, 0.22], [0.68, 0.30], [0.72, 0.38]],
-      // Occipital-cerebellum divide
-      [[0.68, 0.62], [0.70, 0.66], [0.70, 0.70]]
+      [[0.52,0.10],[0.50,0.22],[0.48,0.35],[0.50,0.48]],
+      [[0.38,0.48],[0.48,0.50],[0.58,0.52],[0.66,0.56]],
+      [[0.25,0.30],[0.32,0.28],[0.40,0.26],[0.45,0.20]],
+      [[0.58,0.15],[0.62,0.22],[0.68,0.30],[0.72,0.38]],
+      [[0.68,0.62],[0.70,0.66],[0.70,0.70]],
+      // Extra folds for density
+      [[0.30,0.38],[0.35,0.35],[0.42,0.34],[0.48,0.30]],
+      [[0.55,0.30],[0.60,0.35],[0.65,0.42],[0.70,0.48]],
+      [[0.32,0.52],[0.38,0.56],[0.44,0.58],[0.50,0.58]]
     ];
+
+    var padX, padY, scaleX, scaleY;
 
     function resize() {
       W = container.offsetWidth;
@@ -218,153 +189,138 @@
       canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      padX = W * 0.05; padY = H * 0.02;
+      scaleX = W * 0.9; scaleY = H * 0.96;
     }
 
-    /* --- Point-in-brain test (ray casting) --- */
-    function pointInBrain(px, py, outline) {
+    function pointInBrain(px, py) {
       var inside = false;
-      for (var i = 0, j = outline.length - 1; i < outline.length; j = i++) {
-        var xi = outline[i][0], yi = outline[i][1];
-        var xj = outline[j][0], yj = outline[j][1];
-        if (((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi) + xi)) {
+      for (var i = 0, j = brainOutline.length - 1; i < brainOutline.length; j = i++) {
+        var xi = brainOutline[i][0], yi = brainOutline[i][1];
+        var xj = brainOutline[j][0], yj = brainOutline[j][1];
+        if (((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi) + xi))
           inside = !inside;
-        }
       }
       return inside;
     }
 
-    /* --- Sample point along outline with jitter --- */
-    function sampleOutline(outline, jitter) {
-      var idx = Math.floor(Math.random() * outline.length);
-      var next = (idx + 1) % outline.length;
-      var t = Math.random();
-      var x = outline[idx][0] + (outline[next][0] - outline[idx][0]) * t;
-      var y = outline[idx][1] + (outline[next][1] - outline[idx][1]) * t;
-      x += (Math.random() - 0.5) * jitter;
-      y += (Math.random() - 0.5) * jitter;
-      return [x, y];
+    function toCanvas(nx, ny) {
+      return [padX + nx * scaleX, padY + ny * scaleY];
     }
 
-    /* --- Sample point along a fissure --- */
-    function sampleFissure(fissure, jitter) {
-      var idx = Math.floor(Math.random() * (fissure.length - 1));
+    function sampleOutline(jitter) {
+      var idx = Math.floor(Math.random() * brainOutline.length);
+      var next = (idx + 1) % brainOutline.length;
       var t = Math.random();
-      var x = fissure[idx][0] + (fissure[idx + 1][0] - fissure[idx][0]) * t;
-      var y = fissure[idx][1] + (fissure[idx + 1][1] - fissure[idx][1]) * t;
-      x += (Math.random() - 0.5) * jitter;
-      y += (Math.random() - 0.5) * jitter;
-      return [x, y];
+      return [
+        brainOutline[idx][0] + (brainOutline[next][0] - brainOutline[idx][0]) * t + (Math.random()-0.5) * jitter,
+        brainOutline[idx][1] + (brainOutline[next][1] - brainOutline[idx][1]) * t + (Math.random()-0.5) * jitter
+      ];
+    }
+
+    function sampleFissure() {
+      var f = fissures[Math.floor(Math.random() * fissures.length)];
+      var i = Math.floor(Math.random() * (f.length - 1));
+      var t = Math.random();
+      return [
+        f[i][0] + (f[i+1][0] - f[i][0]) * t + (Math.random()-0.5) * 0.015,
+        f[i][1] + (f[i+1][1] - f[i][1]) * t + (Math.random()-0.5) * 0.015
+      ];
+    }
+
+    /* --- Distance from edge (0=edge, 1=center) for brightness falloff --- */
+    function edgeDist(nx, ny) {
+      var cx = 0.48, cy = 0.48;
+      var dx = nx - cx, dy = ny - cy;
+      return Math.sqrt(dx*dx + dy*dy);
     }
 
     function createParticles() {
-      particles = [];
-      connections = [];
+      particles = []; connections = [];
 
-      var padX = W * 0.05;
-      var padY = H * 0.02;
-      var scaleX = W * 0.9;
-      var scaleY = H * 0.96;
-
-      // Scale outline to canvas coordinates
-      var scaledOutline = brainOutline.map(function (p) {
-        return [padX + p[0] * scaleX, padY + p[1] * scaleY];
-      });
-
-      var placed = 0;
-      var attempts = 0;
-
-      // --- Outline particles (30%) - define the silhouette ---
-      var outlineCount = Math.floor(PARTICLE_COUNT * 0.25);
+      // --- Outline particles (35%) — bright, define silhouette clearly ---
+      var outlineCount = Math.floor(PARTICLE_COUNT * 0.35);
       for (var i = 0; i < outlineCount; i++) {
-        var op = sampleOutline(brainOutline, 0.025);
-        var px = padX + op[0] * scaleX;
-        var py = padY + op[1] * scaleY;
-        particles.push(makeParticle(px, py, 0.4 + Math.random() * 0.5, 0.15 + Math.random() * 0.35));
+        var p = sampleOutline(0.015);
+        var c = toCanvas(p[0], p[1]);
+        particles.push(makeParticle(c[0], c[1], 0.5 + Math.random() * 0.6, 0.3 + Math.random() * 0.5, true));
       }
-      placed += outlineCount;
 
-      // --- Fissure particles (15%) - internal brain folds ---
-      var fissureCount = Math.floor(PARTICLE_COUNT * 0.15);
-      for (var i = 0; i < fissureCount; i++) {
-        var fissure = fissures[Math.floor(Math.random() * fissures.length)];
-        var fp = sampleFissure(fissure, 0.02);
-        var px = padX + fp[0] * scaleX;
-        var py = padY + fp[1] * scaleY;
-        particles.push(makeParticle(px, py, 0.4 + Math.random() * 0.6, 0.2 + Math.random() * 0.5));
+      // --- Second outline pass — very tight to edge for sharp boundary ---
+      for (var i = 0; i < Math.floor(PARTICLE_COUNT * 0.1); i++) {
+        var p = sampleOutline(0.005);
+        var c = toCanvas(p[0], p[1]);
+        particles.push(makeParticle(c[0], c[1], 0.3 + Math.random() * 0.3, 0.4 + Math.random() * 0.4, true));
       }
-      placed += fissureCount;
 
-      // --- Interior particles (50%) - fill the brain shape ---
-      var interiorCount = PARTICLE_COUNT - placed - Math.floor(PARTICLE_COUNT * 0.08);
-      var interiorPlaced = 0;
-      attempts = 0;
-      while (interiorPlaced < interiorCount && attempts < interiorCount * 20) {
+      // --- Fissure particles (15%) ---
+      for (var i = 0; i < Math.floor(PARTICLE_COUNT * 0.15); i++) {
+        var p = sampleFissure();
+        var c = toCanvas(p[0], p[1]);
+        particles.push(makeParticle(c[0], c[1], 0.4 + Math.random() * 0.6, 0.2 + Math.random() * 0.45, false));
+      }
+
+      // --- Interior particles (35%) ---
+      var interior = Math.floor(PARTICLE_COUNT * 0.35);
+      var placed = 0, attempts = 0;
+      while (placed < interior && attempts < interior * 25) {
         attempts++;
-        var nx = Math.random();
-        var ny = Math.random();
-        if (pointInBrain(nx, ny, brainOutline)) {
-          var px = padX + nx * scaleX;
-          var py = padY + ny * scaleY;
-          particles.push(makeParticle(px, py, 0.5 + Math.random() * 1.2, 0.1 + Math.random() * 0.55));
-          interiorPlaced++;
+        var nx = 0.15 + Math.random() * 0.68;
+        var ny = 0.03 + Math.random() * 0.92;
+        if (pointInBrain(nx, ny)) {
+          var c = toCanvas(nx, ny);
+          var d = edgeDist(nx, ny);
+          // Brighter near center, dimmer at edges (already have edge particles)
+          var op = 0.05 + Math.random() * 0.35;
+          particles.push(makeParticle(c[0], c[1], 0.4 + Math.random() * 1.0, op, false));
+          placed++;
         }
       }
 
-      // --- Dendrite scatter (8%) - outside the brain, like neural dust ---
-      var dendriteCount = Math.floor(PARTICLE_COUNT * 0.08);
-      for (var i = 0; i < dendriteCount; i++) {
-        var op = sampleOutline(brainOutline, 0.06 + Math.random() * 0.04);
-        // Push outward
-        var cx = 0.5, cy = 0.5;
-        var dx = op[0] - cx;
-        var dy = op[1] - cy;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        var push = 0.02 + Math.random() * 0.05;
-        var nx = op[0] + (dx / dist) * push;
-        var ny = op[1] + (dy / dist) * push;
-        var px = padX + nx * scaleX;
-        var py = padY + ny * scaleY;
-        particles.push(makeParticle(px, py, 0.3 + Math.random() * 0.6, 0.08 + Math.random() * 0.2));
+      // --- Dendrite scatter (5%) — sparse halo outside ---
+      for (var i = 0; i < Math.floor(PARTICLE_COUNT * 0.05); i++) {
+        var p = sampleOutline(0.05);
+        var cx = 0.48, cy = 0.48;
+        var dx = p[0]-cx, dy = p[1]-cy;
+        var d = Math.sqrt(dx*dx+dy*dy) || 1;
+        p[0] += (dx/d) * (0.03 + Math.random()*0.06);
+        p[1] += (dy/d) * (0.03 + Math.random()*0.06);
+        var c = toCanvas(p[0], p[1]);
+        particles.push(makeParticle(c[0], c[1], 0.2 + Math.random() * 0.4, 0.04 + Math.random() * 0.12, false));
       }
 
-      // --- Build connection list (nearby particles) ---
       buildConnections();
     }
 
-    function makeParticle(x, y, size, opacity) {
+    function makeParticle(x, y, size, opacity, isEdge) {
       return {
-        x: x, y: y,
-        baseX: x, baseY: y,
-        size: size,
-        opacity: opacity,
-        driftSpeed: 0.15 + Math.random() * 0.5,
-        driftRadius: 0.8 + Math.random() * 2.5,
+        x: x, y: y, baseX: x, baseY: y,
+        size: size, baseSize: size,
+        opacity: opacity, baseOpacity: opacity,
+        isEdge: isEdge,
+        driftSpeed: 0.1 + Math.random() * 0.4,
+        driftRadius: 0.5 + Math.random() * 2.0,
         phase: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.3 + Math.random() * 1.2
+        twinkleSpeed: 0.2 + Math.random() * 1.0,
+        fireGlow: 0  // for neuron firing effect
       };
     }
 
     function buildConnections() {
       connections = [];
-      // Only connect nearby particles - gives the neural network / vine look
       for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        // Each particle connects to at most 2 neighbours
         var found = 0;
-        for (var j = i + 1; j < particles.length && found < 2; j++) {
-          var q = particles[j];
-          var dx = p.baseX - q.baseX;
-          var dy = p.baseY - q.baseY;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECTION_DIST && dist > 5) {
-            // Probability decreases with distance
-            if (Math.random() < 0.35) {
+        for (var j = i + 1; j < particles.length && found < 3; j++) {
+          var dx = particles[i].baseX - particles[j].baseX;
+          var dy = particles[i].baseY - particles[j].baseY;
+          var dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < CONNECTION_DIST && dist > 3) {
+            if (Math.random() < 0.3) {
               connections.push({
                 a: i, b: j,
-                opacity: 0.04 + (1 - dist / CONNECTION_DIST) * 0.08,
-                // Control point offset for slight curve (vine-like)
-                cx: (p.baseX + q.baseX) / 2 + (Math.random() - 0.5) * 10,
-                cy: (p.baseY + q.baseY) / 2 + (Math.random() - 0.5) * 10
+                opacity: 0.025 + (1 - dist/CONNECTION_DIST) * 0.06,
+                cx: (particles[i].baseX + particles[j].baseX)/2 + (Math.random()-0.5)*8,
+                cy: (particles[i].baseY + particles[j].baseY)/2 + (Math.random()-0.5)*8
               });
               found++;
             }
@@ -373,45 +329,139 @@
       }
     }
 
+    /* --- Neuron Firing System --- */
+    function triggerFiring() {
+      if (particles.length === 0) return;
+
+      // Pick a random particle to "fire"
+      var idx = Math.floor(Math.random() * particles.length);
+      var p = particles[idx];
+      p.fireGlow = 1.0;
+
+      // Find connected particles and propagate with delay
+      var wave = [idx];
+      var visited = {};
+      visited[idx] = true;
+
+      function propagate(sourceIdx, depth) {
+        if (depth > 4) return;
+        for (var c = 0; c < connections.length; c++) {
+          var conn = connections[c];
+          var targetIdx = -1;
+          if (conn.a === sourceIdx && !visited[conn.b]) targetIdx = conn.b;
+          if (conn.b === sourceIdx && !visited[conn.a]) targetIdx = conn.a;
+          if (targetIdx >= 0) {
+            visited[targetIdx] = true;
+            // Launch a traveller along this connection
+            travellers.push({
+              conn: c,
+              progress: conn.a === sourceIdx ? 0 : 1,
+              direction: conn.a === sourceIdx ? 1 : -1,
+              speed: 1.5 + Math.random() * 1.5,
+              opacity: 0.6 - depth * 0.1
+            });
+            // Delayed fire on target
+            (function(ti, d) {
+              setTimeout(function() {
+                if (particles[ti]) particles[ti].fireGlow = Math.max(0.3, 0.8 - d * 0.15);
+                propagate(ti, d + 1);
+              }, 80 + d * 60);
+            })(targetIdx, depth);
+          }
+        }
+      }
+
+      propagate(idx, 0);
+
+      // Schedule next firing
+      setTimeout(triggerFiring, 600 + Math.random() * 1500);
+    }
+
     var time = 0;
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
       time += 0.016;
 
-      // --- Draw connections first (behind particles) ---
+      // --- Connections ---
       for (var c = 0; c < connections.length; c++) {
         var conn = connections[c];
-        var a = particles[conn.a];
-        var b = particles[conn.b];
-
-        ctx.globalAlpha = conn.opacity;
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 0.4;
+        var a = particles[conn.a], b = particles[conn.b];
+        var glow = Math.max(a.fireGlow, b.fireGlow);
+        ctx.globalAlpha = conn.opacity + glow * 0.15;
+        ctx.strokeStyle = glow > 0.1 ? 'rgba(180,210,255,' + (0.3 + glow * 0.5) + ')' : '#fff';
+        ctx.lineWidth = glow > 0.1 ? 0.6 : 0.35;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.quadraticCurveTo(conn.cx, conn.cy, b.x, b.y);
         ctx.stroke();
       }
 
-      // --- Draw particles ---
+      // --- Travellers (particles moving along connections) ---
+      for (var t = travellers.length - 1; t >= 0; t--) {
+        var tr = travellers[t];
+        tr.progress += tr.direction * tr.speed * 0.016;
+        if (tr.progress < 0 || tr.progress > 1) {
+          travellers.splice(t, 1);
+          continue;
+        }
+        var conn = connections[tr.conn];
+        if (!conn) { travellers.splice(t, 1); continue; }
+        var a = particles[conn.a], b = particles[conn.b];
+        var p = tr.progress;
+        var ip = 1 - p;
+        // Quadratic bezier point
+        var tx = ip*ip*a.x + 2*ip*p*conn.cx + p*p*b.x;
+        var ty = ip*ip*a.y + 2*ip*p*conn.cy + p*p*b.y;
+
+        ctx.globalAlpha = tr.opacity * (1 - Math.abs(p - 0.5) * 1.2);
+        ctx.fillStyle = '#8ac4ff';
+        ctx.beginPath();
+        ctx.arc(tx, ty, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        // Glow
+        ctx.globalAlpha *= 0.3;
+        ctx.beginPath();
+        ctx.arc(tx, ty, 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // --- Particles ---
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
 
         if (!prefersReducedMotion) {
           p.x = p.baseX + Math.cos(time * p.driftSpeed + p.phase) * p.driftRadius;
           p.y = p.baseY + Math.sin(time * p.driftSpeed * 0.7 + p.phase) * p.driftRadius;
-
           var twinkle = 0.5 + 0.5 * Math.sin(time * p.twinkleSpeed + p.phase);
-          ctx.globalAlpha = p.opacity * (0.4 + twinkle * 0.6);
+          ctx.globalAlpha = p.opacity * (0.5 + twinkle * 0.5);
         } else {
           ctx.globalAlpha = p.opacity;
         }
 
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        // Firing glow effect
+        if (p.fireGlow > 0.01) {
+          ctx.globalAlpha = Math.min(1, ctx.globalAlpha + p.fireGlow * 0.6);
+          var gs = p.baseSize + p.fireGlow * 2;
+          // Draw glow halo
+          ctx.fillStyle = 'rgba(140,190,255,' + (p.fireGlow * 0.4) + ')';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, gs + 3, 0, Math.PI * 2);
+          ctx.fill();
+          // Core
+          ctx.fillStyle = p.fireGlow > 0.3 ? '#c8dfff' : '#fff';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, gs, 0, Math.PI * 2);
+          ctx.fill();
+          // Decay
+          p.fireGlow *= 0.96;
+        } else {
+          p.fireGlow = 0;
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       if (!prefersReducedMotion) {
@@ -422,6 +472,11 @@
     resize();
     createParticles();
     draw();
+
+    // Start neuron firings after a short delay
+    if (!prefersReducedMotion) {
+      setTimeout(triggerFiring, 1500);
+    }
 
     window.addEventListener('resize', function () {
       resize();

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Still Marsh — Numbness | The Neural Jungle</title>
+  <meta name="description" content="Numbness in the nervous system — the still marsh.">
+  <meta property="og:title" content="The Still Marsh — Numbness | The Neural Jungle">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/terrains.css">
+</head>
+<body data-terrain="numbness" class="terrain-numbness">
+  <div class="page-transition"></div>
+
+  <nav class="terrain-nav">
+    <a href="explore.html" data-transition>&larr; Return to map</a>
+    <span class="terrain-title">II &mdash; The Still Marsh</span>
+    <a href="addictions.html" data-transition>Next terrain &rarr;</a>
+  </nav>
+
+  <div class="mode-toggle">
+    <button class="active" data-mode="poetic">Poetic</button>
+    <button data-mode="explain">Explain</button>
+  </div>
+
+  <div class="mini-brain-corner">
+    <canvas id="corner-brain" width="140" height="140"></canvas>
+    <div class="region-label">Brain Stem</div>
+  </div>
+
+  <button class="audio-toggle muted" aria-label="Unmute ambient sound"></button>
+
+  <main>
+    <div class="full-bleed hero-image">
+      <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=1600&h=900&fit=crop&crop=center" alt="Still water and mist over marshland">
+      <div class="hero-overlay">
+        <h1>The Still Marsh</h1>
+        <p class="subtitle">Numbness</p>
+      </div>
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>The water is perfectly still. The air barely moves. This is not the sharp pain of grief but something more unsettling: the absence of feeling altogether.</p>
+        <blockquote>Numbness is not the absence of feeling. It is feeling's bodyguard.</blockquote>
+      </div>
+      <div class="text-explain">
+        <p>Numbness is your nervous system's oldest protection mechanism. When the brain decides that neither fighting nor fleeing will work, it activates the "freeze" response &mdash; shutting down emotion, slowing the heart, and withdrawing from sensation. You're not broken. Your brain is protecting you from overwhelm.</p>
+      </div>
+    </div>
+
+    <div class="full-bleed tall reveal">
+      <img src="https://images.unsplash.com/photo-1504567961542-e24d9439a724?w=1600&h=900&fit=crop&crop=center" alt="Bare trees reflected in still foggy water">
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>The dorsal vagal complex governs the freeze response. Heart rate slows, emotion flatlines, the marsh goes still. The insula &mdash; the brain's body-sensing centre &mdash; goes quiet. You literally lose the ability to feel what's happening inside you.</p>
+      </div>
+      <div class="text-explain">
+        <p>The dorsal vagal complex is the oldest branch of your autonomic nervous system (the system that runs automatically, like heartbeat and digestion). When activated, it slows everything down. The insula, which is the brain region responsible for sensing your internal body state, goes offline. This is why numbness feels like being disconnected from your own body &mdash; because you temporarily are.</p>
+      </div>
+    </div>
+
+    <div class="full-bleed tall reveal">
+      <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600&h=900&fit=crop&crop=center" alt="Frozen water surface with ethereal light">
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>MDMA creates a neurochemical window where feeling becomes possible again without triggering another shutdown. Under psilocybin, the insula wakes up. Participants report feeling their own heartbeat for the first time in years.</p>
+        <blockquote>The fog lifts because the nervous system finally believes it's safe enough to feel.</blockquote>
+      </div>
+      <div class="text-explain">
+        <p>MDMA reduces activity in the amygdala (fear centre) while boosting oxytocin and serotonin. This creates a safe window where you can start to feel emotions again without your brain re-triggering the freeze response. Psilocybin reactivates the insula, literally restoring your ability to sense your own body. Many participants in clinical trials describe reconnecting with physical sensation they hadn't felt in years.</p>
+      </div>
+    </div>
+
+    <div class="brain-compare reveal">
+      <div class="brain-compare-panel">
+        <canvas id="brain-before" width="160" height="160"></canvas>
+        <div class="brain-compare-label">Default State<strong>Brain stem dominant &middot; Insula offline</strong></div>
+      </div>
+      <div class="brain-compare-divider">&rarr;</div>
+      <div class="brain-compare-panel">
+        <canvas id="brain-after" width="160" height="160"></canvas>
+        <div class="brain-compare-label">On MDMA / Psilocybin<strong>Insula reactivated &middot; Body sensation returns</strong></div>
+      </div>
+    </div>
+
+    <div class="full-bleed medium reveal">
+      <img src="https://images.unsplash.com/photo-1478827387698-1527781a4887?w=1600&h=900&fit=crop&crop=center" alt="Branches reaching through thick fog">
+    </div>
+
+    <div class="text-section reveal">
+      <blockquote>The first feeling after numbness is rarely joy. It is usually just: "I'm here." And that is enough.</blockquote>
+    </div>
+
+    <div class="full-bleed medium reveal">
+      <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&h=900&fit=crop&crop=center" alt="Atmospheric landscape with distant light">
+    </div>
+
+    <div class="next-terrain reveal">
+      <a href="addictions.html" data-transition>Next &mdash; The Looping Vines &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>The Neural Jungle is an educational exploration. It is not medical advice.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/mini-brain.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/audio.js"></script>
+  <script>
+    var cornerBrain = new MiniBrain(document.getElementById('corner-brain'), { terrain: 'numbness', size: 140 });
+    cornerBrain.startAnimation();
+    var beforeBrain = new MiniBrain(document.getElementById('brain-before'), { terrain: 'numbness', size: 160, showConnectivity: false });
+    beforeBrain.startAnimation();
+    var afterBrain = new MiniBrain(document.getElementById('brain-after'), { terrain: 'numbness', size: 160, showConnectivity: true, psilocybinMode: true });
+    afterBrain.startAnimation();
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Looping Vines — Addictions | The Neural Jungle</title>
+  <meta name="description" content="Addiction in the nervous system — the looping vines.">
+  <meta property="og:title" content="The Looping Vines — Addictions | The Neural Jungle">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/terrains.css">
+</head>
+<body data-terrain="addictions" class="terrain-addictions">
+  <div class="page-transition"></div>
+
+  <nav class="terrain-nav">
+    <a href="explore.html" data-transition>&larr; Return to map</a>
+    <span class="terrain-title">III &mdash; The Looping Vines</span>
+    <a href="depression.html" data-transition>Next terrain &rarr;</a>
+  </nav>
+
+  <div class="mode-toggle">
+    <button class="active" data-mode="poetic">Poetic</button>
+    <button data-mode="explain">Explain</button>
+  </div>
+
+  <div class="mini-brain-corner">
+    <canvas id="corner-brain" width="140" height="140"></canvas>
+    <div class="region-label">Reward Circuit</div>
+  </div>
+
+  <button class="audio-toggle muted" aria-label="Unmute ambient sound"></button>
+
+  <main>
+    <div class="full-bleed hero-image">
+      <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1600&h=900&fit=crop&crop=center" alt="Twisted vines and tangled roots">
+      <div class="hero-overlay">
+        <h1>The Looping Vines</h1>
+        <p class="subtitle">Addictions</p>
+      </div>
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>The trails are deep, worn into the earth by repetition. The vine reaches for your hand before you've decided to reach for it.</p>
+        <blockquote>Addiction is not a failure of willpower. It is a hijacking of the brain's oldest learning system.</blockquote>
+      </div>
+      <div class="text-explain">
+        <p>Addiction rewires your brain's reward system. The nucleus accumbens, a small region deep in the brain, learns to prioritise an addictive substance above everything else &mdash; food, safety, relationships. This isn't a choice. It's a neurological hijacking of the system your brain uses to decide what matters most.</p>
+      </div>
+    </div>
+
+    <div class="full-bleed tall reveal">
+      <img src="https://images.unsplash.com/photo-1440342359743-84fcb8c21c7c?w=1600&h=900&fit=crop&crop=center" alt="Amber light filtering through dense vine jungle">
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>Dopamine is not the pleasure chemical &mdash; it is the <em>wanting</em> chemical. The molecule of craving and prediction. The basal ganglia wear the trail so deep that walking it requires no thought. Leaving it requires everything.</p>
+      </div>
+      <div class="text-explain">
+        <p>Dopamine doesn't create pleasure &mdash; it creates <em>wanting</em>. It's the brain's way of saying "do that again, it's important." Addictive drugs flood the brain with 3-10x more dopamine than natural rewards. Over time, the brain reduces its own dopamine receptors, so you need more just to feel normal. Meanwhile, the behaviour becomes automatic &mdash; handled by the basal ganglia (habit centre), bypassing the prefrontal cortex (decision-making).</p>
+      </div>
+    </div>
+
+    <div class="full-bleed tall reveal">
+      <img src="https://images.unsplash.com/photo-1470058869958-2a77bde3e86a?w=1600&h=900&fit=crop&crop=center" alt="Spiralling plant tendrils in repeating patterns">
+    </div>
+
+    <div class="text-section reveal">
+      <div class="text-poetic">
+        <p>Psilocybin-assisted therapy achieved 80% tobacco abstinence at six months. The person sees the loop from above it for the first time.</p>
+        <blockquote>You cannot think your way out of a loop. You have to see it from above.</blockquote>
+      </div>
+      <div class="text-explain">
+        <p>Psilocybin disrupts the rigid automatic patterns of addiction. Brain imaging shows it restores activity in the prefrontal cortex (your decision-making centre) while reducing the dominance of habit circuits. At Johns Hopkins, 80% of smokers were abstinent after 6 months of psilocybin therapy &mdash; more than double the best conventional treatment. The key seems to be gaining perspective on the pattern from outside it.</p>
+      </div>
+    </div>
+
+    <div class="brain-compare reveal">
+      <div class="brain-compare-panel">
+        <canvas id="brain-before" width="160" height="160"></canvas>
+        <div class="brain-compare-label">Default State<strong>Reward circuit hijacked &middot; Prefrontal dimmed</strong></div>
+      </div>
+      <div class="brain-compare-divider">&rarr;</div>
+      <div class="brain-compare-panel">
+        <canvas id="brain-after" width="160" height="160"></canvas>
+        <div class="brain-compare-label">On Psilocybin<strong>Prefrontal restored &middot; Habit loops disrupted</strong></div>
+      </div>
+    </div>
+
+    <div class="full-bleed medium reveal">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&h=900&fit=crop&crop=center" alt="Sunlit clearing with new growth">
+    </div>
+
+    <div class="text-section reveal">
+      <blockquote>The vine doesn't loosen because you hate it. It loosens because you've found something you love more.</blockquote>
+    </div>
+
+    <div class="next-terrain reveal">
+      <a href="depression.html" data-transition>Next &mdash; The Sunken Grove &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>The Neural Jungle is an educational exploration. It is not medical advice.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/mini-brain.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/audio.js"></script>
+  <script>
+    var cornerBrain = new MiniBrain(document.getElementById('corner-brain'), { terrain: 'addictions', size: 140 });
+    cornerBrain.startAnimation();
+    var beforeBrain = new MiniBrain(document.getElementById('brain-before'), { terrain: 'addictions', size: 160, showConnectivity: false });
+    beforeBrain.startAnimation();
+    var afterBrain = new MiniBrain(document.getElementById('brain-after'), { terrain: 'addictions', size: 160, showConnectivity: true, psilocybinMode: true });
+    afterBrain.startAnimation();
+  </script>
+</body>
+</html>

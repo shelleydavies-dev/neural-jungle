@@ -1,0 +1,40 @@
+/* ============================================
+   THE NEURAL JUNGLE — Terrain-Specific Styles
+   ============================================ */
+
+/* --- Terrain: Grief — The Weeping Canopy --- */
+.terrain-grief {
+  --terrain-accent: #5ba8c8;
+}
+
+/* --- Terrain: Numbness — The Still Marsh --- */
+.terrain-numbness {
+  --terrain-accent: #7a9a8a;
+}
+
+/* --- Terrain: Addictions — The Looping Vines --- */
+.terrain-addictions {
+  --terrain-accent: #e8a44a;
+}
+
+/* --- Terrain: Depression — The Sunken Grove --- */
+.terrain-depression {
+  --terrain-accent: #9b7ecb;
+}
+
+/* --- Portal accent dots (landing page) --- */
+.sphere-dot[data-terrain="grief"] {
+  background: #5ba8c8;
+}
+
+.sphere-dot[data-terrain="numbness"] {
+  background: #7a9a8a;
+}
+
+.sphere-dot[data-terrain="addictions"] {
+  background: #e8a44a;
+}
+
+.sphere-dot[data-terrain="depression"] {
+  background: #9b7ecb;
+}

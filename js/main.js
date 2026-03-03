@@ -167,6 +167,24 @@
         }
       );
     });
+
+    // --- Generic reveal for any .reveal not already handled ---
+    gsap.utils.toArray('.reveal:not(.text-section):not(.full-bleed):not(.next-terrain)').forEach(function (el) {
+      gsap.fromTo(el,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
   }
 
   /* --- Fallback: IntersectionObserver for scroll reveals --- */

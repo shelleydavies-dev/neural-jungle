@@ -200,7 +200,7 @@
         ctx.strokeStyle = 'rgba(' + accent.join(',') + ',0.8)';
       } else {
         ctx.globalAlpha = conn.o;
-        ctx.strokeStyle = '#fff';
+        ctx.strokeStyle = '#8ab885';
       }
 
       ctx.lineWidth = 0.3;
@@ -238,7 +238,7 @@
         ctx.fillStyle = 'rgb(' + accent.join(',') + ')';
         ctx.globalAlpha = Math.min(1, ctx.globalAlpha * 2);
       } else {
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = '#c8e6c0';
       }
 
       ctx.beginPath();

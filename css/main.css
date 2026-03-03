@@ -7,10 +7,10 @@
 
 /* --- Custom Properties --- */
 :root {
-  --bg: #000;
-  --text-primary: #fff;
-  --text-secondary: #888;
-  --text-muted: #555;
+  --bg: #141e18;
+  --text-primary: #f2f5ef;
+  --text-secondary: #b4c8aa;
+  --text-muted: #7a9472;
 
   /* Terrain accents (overridden per page) */
   --terrain-accent: #fff;
@@ -47,6 +47,7 @@ body {
   background-color: var(--bg);
   overflow-x: hidden;
   min-height: 100vh;
+  color: var(--text-primary);
 }
 
 /* --- Typography --- */
@@ -111,7 +112,7 @@ blockquote {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: #000;
+  background: #141e18;
   opacity: 0;
   pointer-events: none;
   transition: opacity 500ms var(--ease-smooth);
@@ -158,7 +159,7 @@ blockquote {
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(160,210,150,0.28);
   border-radius: 50%;
   color: var(--text-primary);
   transition: all var(--transition-med);
@@ -166,8 +167,8 @@ blockquote {
 }
 
 .back-arrow:hover {
-  border-color: rgba(255,255,255,0.6);
-  color: #fff;
+  border-color: rgba(160,210,150,0.65);
+  color: var(--text-primary);
 }
 
 /* --- Sphere Container --- */
@@ -195,17 +196,17 @@ blockquote {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #1a1a1a 0%, #0d0d0d 40%, #050505 70%, #000 100%);
+  background: radial-gradient(circle at 40% 35%, #1a2418 0%, #0d150d 40%, #081008 70%, #141e18 100%);
   box-shadow:
-    inset 0 0 80px rgba(255,255,255,0.03),
-    0 0 120px rgba(255,255,255,0.02);
+    inset 0 0 80px rgba(160,210,150,0.05),
+    0 0 120px rgba(160,210,150,0.04);
 }
 
 .sphere-ring {
   position: absolute;
   inset: -1px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(160,210,150,0.14);
 }
 
 /* --- Neural Network SVG Overlay --- */
@@ -242,7 +243,7 @@ blockquote {
 
 .portal:hover {
   transform: scale(1.08);
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .portal-image {
@@ -250,13 +251,13 @@ blockquote {
   height: 90px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1.5px solid rgba(255,255,255,0.3);
+  border: 1.5px solid rgba(160,210,150,0.35);
   transition: border-color var(--transition-med), box-shadow var(--transition-med);
 }
 
 .portal:hover .portal-image {
-  border-color: rgba(255,255,255,0.8);
-  box-shadow: 0 0 20px rgba(255,255,255,0.15);
+  border-color: rgba(160,210,150,0.85);
+  box-shadow: 0 0 20px rgba(160,210,150,0.22);
 }
 
 .portal-image img {
@@ -347,7 +348,7 @@ blockquote {
   justify-content: center;
   gap: 3rem;
   padding: 1.5rem 2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(10,18,8,0.9) 0%, transparent 100%);
 }
 
 .bottom-nav a {
@@ -380,7 +381,7 @@ blockquote {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(10,18,8,0.95) 0%, rgba(10,18,8,0.5) 60%, transparent 100%);
 }
 
 .terrain-nav a {
@@ -436,10 +437,10 @@ blockquote {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.3) 0%,
-    rgba(0,0,0,0.1) 40%,
-    rgba(0,0,0,0.5) 80%,
-    rgba(0,0,0,0.8) 100%
+    rgba(10,18,8,0.3) 0%,
+    rgba(10,18,8,0.1) 40%,
+    rgba(10,18,8,0.5) 80%,
+    rgba(10,18,8,0.8) 100%
   );
   display: flex;
   flex-direction: column;
@@ -457,7 +458,7 @@ blockquote {
   font-weight: 300;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  color: rgba(232,240,228,0.7);
 }
 
 /* --- Text Section --- */
@@ -492,13 +493,13 @@ blockquote {
   text-transform: uppercase;
   color: var(--text-muted);
   padding: 1rem 2.5rem;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(160,210,150,0.22);
   transition: all var(--transition-med);
 }
 
 .next-terrain a:hover {
   color: var(--text-primary);
-  border-color: rgba(255,255,255,0.5);
+  border-color: rgba(160,210,150,0.55);
 }
 
 /* --- Audio Toggle --- */
@@ -512,8 +513,8 @@ blockquote {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(10,18,8,0.6);
+  border: 1px solid rgba(160,210,150,0.22);
   border-radius: 50%;
   color: var(--text-primary);
   cursor: pointer;
@@ -522,7 +523,7 @@ blockquote {
 }
 
 .audio-toggle:hover {
-  border-color: rgba(255,255,255,0.5);
+  border-color: rgba(160,210,150,0.55);
 }
 
 .audio-toggle svg {
@@ -538,7 +539,7 @@ blockquote {
 .site-footer {
   padding: 3rem 2.5rem;
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(160,210,150,0.1);
 }
 
 .site-footer p {
@@ -671,7 +672,7 @@ blockquote {
 
 /* --- Selection --- */
 ::selection {
-  background: rgba(255,255,255,0.15);
+  background: rgba(160,210,150,0.22);
   color: var(--text-primary);
 }
 
@@ -681,16 +682,16 @@ blockquote {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #141e18;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222;
+  background: #243828;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: #3a5a3a;
 }
 
 /* ============================================
@@ -733,7 +734,7 @@ blockquote {
   right: 1.5rem;
   z-index: 60;
   display: flex;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(160,210,150,0.18);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -741,7 +742,7 @@ blockquote {
 .mode-toggle button {
   background: none;
   border: none;
-  color: #555;
+  color: #4a6a4a;
   font-family: var(--font-body);
   font-size: 0.55rem;
   font-weight: 300;
@@ -753,12 +754,12 @@ blockquote {
 }
 
 .mode-toggle button.active {
-  color: #fff;
-  background: rgba(255,255,255,0.08);
+  color: #e8f0e4;
+  background: rgba(160,210,150,0.14);
 }
 
 .mode-toggle button:hover {
-  color: #aaa;
+  color: #8aaa8a;
 }
 
 /* Toggle text visibility */
@@ -796,13 +797,13 @@ body.mode-explain .text-explain { display: block; }
   font-size: 0.55rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #555;
+  color: #4a6a4a;
   text-align: center;
 }
 
 .brain-compare-label strong {
   display: block;
-  color: #888;
+  color: #8aaa8a;
   font-weight: 400;
   margin-top: 0.2rem;
   font-size: 0.5rem;
@@ -812,7 +813,7 @@ body.mode-explain .text-explain { display: block; }
 .brain-compare-divider {
   display: flex;
   align-items: center;
-  color: #333;
+  color: #4a6a50;
   font-size: 1.2rem;
   padding-top: 3rem;
 }

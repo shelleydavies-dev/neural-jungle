@@ -8,7 +8,7 @@
   <meta property="og:title" content="The Neural Jungle">
   <meta property="og:description" content="A mythic map of your nervous system.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#141e18">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #000;
-      color: #fff;
+      background: #141e18;
+      color: #f2f5ef;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow: hidden;
       height: 100vh;
@@ -45,7 +45,7 @@
       font-weight: 300;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: #fff;
+      color: #f2f5ef;
       opacity: 0;
       animation: fade-in-title 1.5s ease 0.5s forwards;
     }
@@ -62,9 +62,9 @@
       font-weight: 300;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #fff;
+      color: #f2f5ef;
       text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(160,210,150,0.2);
       border-radius: 30px;
       transition: border-color 0.4s ease, background 0.4s ease;
       opacity: 0;
@@ -72,15 +72,15 @@
     }
 
     .enter-btn:hover {
-      border-color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.04);
+      border-color: rgba(160,210,150,0.6);
+      background: rgba(160,210,150,0.04);
     }
 
     .page-transition {
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: #000;
+      background: #141e18;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.6s ease;
@@ -389,7 +389,7 @@
         var a = particles[conn.a], b = particles[conn.b];
         var glow = Math.max(a.fireGlow, b.fireGlow);
         ctx.globalAlpha = conn.opacity + glow * 0.15;
-        ctx.strokeStyle = glow > 0.1 ? 'rgba(180,210,255,' + (0.3 + glow * 0.5) + ')' : '#fff';
+        ctx.strokeStyle = glow > 0.1 ? 'rgba(90,232,160,' + (0.3 + glow * 0.5) + ')' : '#8ab885';
         ctx.lineWidth = glow > 0.1 ? 0.6 : 0.35;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -415,7 +415,7 @@
         var ty = ip*ip*a.y + 2*ip*p*conn.cy + p*p*b.y;
 
         ctx.globalAlpha = tr.opacity * (1 - Math.abs(p - 0.5) * 1.2);
-        ctx.fillStyle = '#8ac4ff';
+        ctx.fillStyle = '#5ae8a0';
         ctx.beginPath();
         ctx.arc(tx, ty, 1.5, 0, Math.PI * 2);
         ctx.fill();
@@ -444,12 +444,12 @@
           ctx.globalAlpha = Math.min(1, ctx.globalAlpha + p.fireGlow * 0.6);
           var gs = p.baseSize + p.fireGlow * 2;
           // Draw glow halo
-          ctx.fillStyle = 'rgba(140,190,255,' + (p.fireGlow * 0.4) + ')';
+          ctx.fillStyle = 'rgba(90,232,160,' + (p.fireGlow * 0.4) + ')';
           ctx.beginPath();
           ctx.arc(p.x, p.y, gs + 3, 0, Math.PI * 2);
           ctx.fill();
           // Core
-          ctx.fillStyle = p.fireGlow > 0.3 ? '#c8dfff' : '#fff';
+          ctx.fillStyle = p.fireGlow > 0.3 ? '#b8f0c8' : '#c8e6c0';
           ctx.beginPath();
           ctx.arc(p.x, p.y, gs, 0, Math.PI * 2);
           ctx.fill();
@@ -457,7 +457,7 @@
           p.fireGlow *= 0.96;
         } else {
           p.fireGlow = 0;
-          ctx.fillStyle = '#fff';
+          ctx.fillStyle = '#c8e6c0';
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
           ctx.fill();

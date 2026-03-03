@@ -7,7 +7,7 @@
   <meta name="description" content="Explore the four terrains of your nervous system.">
   <meta property="og:title" content="The Neural Jungle — Explore">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#141e18">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #000;
-      color: #fff;
+      background: #141e18;
+      color: #f2f5ef;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow: hidden;
       height: 100vh;
@@ -51,11 +51,11 @@
       font-weight: 300;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #fff;
+      color: #f2f5ef;
     }
 
     .map-header .breadcrumb {
-      color: #555;
+      color: #7a9472;
     }
 
     .map-header .back-link {
@@ -66,12 +66,12 @@
       font-size: 0.6rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #555;
+      color: #7a9472;
       text-decoration: none;
       transition: color 0.3s;
     }
 
-    .map-header .back-link:hover { color: #fff; }
+    .map-header .back-link:hover { color: #f2f5ef; }
 
     /* Region hotspots */
     .region {
@@ -91,7 +91,7 @@
       width: 70px;
       height: 70px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(160,210,150,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -108,7 +108,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: rgba(160,210,150,0.3);
       transition: background 0.4s, box-shadow 0.4s;
     }
 
@@ -123,7 +123,7 @@
       font-weight: 400;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #555;
+      color: #7a9472;
       transition: color 0.3s;
       white-space: nowrap;
     }
@@ -135,13 +135,13 @@
       font-size: 0.5rem;
       font-weight: 300;
       letter-spacing: 0.15em;
-      color: #333;
+      color: #4a6a50;
       text-transform: uppercase;
       transition: color 0.3s;
       white-space: nowrap;
     }
 
-    .region:hover .region-name { color: #555; }
+    .region:hover .region-name { color: #7a9472; }
 
     /* Region accent colors */
     .region--grief {
@@ -179,9 +179,25 @@
       font-size: 0.7rem;
       font-weight: 300;
       letter-spacing: 0.1em;
-      color: #444;
+      color: #7a9472;
       max-width: 300px;
       line-height: 1.7;
+    }
+
+    .map-guides-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7a9472;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .map-guides-link:hover {
+      color: #f2f5ef;
     }
 
     /* Transition overlay */
@@ -189,7 +205,7 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: #000;
+      background: #141e18;
       pointer-events: none;
       transition: opacity 0.6s ease;
     }
@@ -284,6 +300,7 @@
   <!-- Footer -->
   <div class="map-footer">
     <p>Select a region of the nervous system to explore its terrain.</p>
+    <a href="guides.html" class="map-guides-link" data-transition>Read the Guides &rarr;</a>
   </div>
 
   <script>
@@ -507,7 +524,7 @@
           var ac = accentColors[hoveredRegion];
           ctx.strokeStyle = 'rgb(' + ac[0] + ',' + ac[1] + ',' + ac[2] + ')';
         } else {
-          ctx.strokeStyle = '#fff';
+          ctx.strokeStyle = '#8ab885';
         }
         ctx.lineWidth = 0.4;
         ctx.beginPath();
@@ -535,7 +552,7 @@
           ctx.fillStyle = 'rgb(' + ac[0] + ',' + ac[1] + ',' + ac[2] + ')';
           ctx.globalAlpha = Math.min(1, ctx.globalAlpha * 2.5);
         } else {
-          ctx.fillStyle = '#fff';
+          ctx.fillStyle = '#c8e6c0';
         }
 
         ctx.beginPath();

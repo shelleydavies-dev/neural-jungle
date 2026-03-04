@@ -7,7 +7,7 @@
   <meta name="description" content="Everything you need to know before stepping into this landscape for the first time. No prior knowledge required.">
   <meta property="og:title" content="Beginner's Guide — The Neural Jungle">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#141e18">
+  <meta name="theme-color" content="#1a1a14">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
   <!-- Navigation -->
   <nav class="article-nav">
     <a href="guides.html" data-transition>&larr; All Guides</a>
-    <span class="article-nav-title">Guide 01</span>
+    <span class="article-nav-title">The Neural Jungle</span>
     <a href="depression-anxiety.html" data-transition>Next guide &rarr;</a>
   </nav>
 
@@ -42,8 +42,7 @@
       <h2 class="reveal">First: What Are Psychedelics?</h2>
 
       <figure class="article-figure reveal">
-        <img src="assets/images/beginners-jungle-neurons.svg"
-             alt="Prompt: Lush dense tropical jungle with layered vegetation and vines. The vines and roots subtly form neural dendrite patterns, with bioluminescent golden-green synaptic nodes glowing at junction points. Dark atmospheric lighting, cinematic 16:9">
+        <canvas data-scene="jungle-neurons"></canvas>
         <figcaption>Your nervous system: billions of neurons forming layered networks of connection &mdash; shaped by years of thought patterns, habits, and learned behaviors.</figcaption>
       </figure>
 
@@ -56,8 +55,7 @@
       <h2 class="reveal">A Field Guide to the Major Substances</h2>
 
       <figure class="article-figure reveal">
-        <img src="assets/images/beginners-field-guide-plants.svg"
-             alt="Prompt: Diverse lush tropical plants, ferns, and fungi in a dense rainforest understory. Each plant subtly glows with different colored bioluminescence — golden, blue, purple, green — representing different psychedelic substances. Botanical illustration meets fantasy jungle, cinematic">
+        <canvas data-scene="field-guide-plants"></canvas>
         <figcaption>A field guide to the terrain: each substance navigates the neural landscape differently &mdash; different trails, different light, different duration.</figcaption>
       </figure>
 
@@ -80,13 +78,11 @@
 
       <div class="image-diptych reveal">
         <div class="diptych-panel">
-          <img src="assets/images/beginners-set-explorer.svg"
-               alt="Prompt: A solitary figure standing at the entrance to a misty jungle trail, viewed from behind. The person's silhouette has faint glowing neural network patterns visible within. Atmospheric fog, dramatic lighting, cinematic">
+          <canvas data-scene="set-explorer"></canvas>
           <span class="diptych-caption">Set &mdash; condition of the explorer</span>
         </div>
         <div class="diptych-panel">
-          <img src="assets/images/beginners-setting-clearing.svg"
-               alt="Prompt: A calm sunlit clearing in a tropical forest with gentle natural light filtering through. The clearing floor has subtle bioluminescent moss patterns resembling neural circuits. Peaceful and inviting atmosphere, cinematic">
+          <canvas data-scene="setting-clearing"></canvas>
           <span class="diptych-caption">Setting &mdash; condition of the trail</span>
         </div>
       </div>
@@ -144,5 +140,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/scene-canvas.js"></script>
 </body>
 </html>

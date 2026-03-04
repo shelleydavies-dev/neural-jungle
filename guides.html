@@ -7,7 +7,7 @@
   <meta name="description" content="Evidence-based psychedelic education. Understand the science, the safety, and the terrain.">
   <meta property="og:title" content="The Neural Jungle — Guides">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#141e18">
+  <meta name="theme-color" content="#1a1a14">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,33 +22,32 @@
   <!-- Navigation -->
   <nav class="article-nav">
     <a href="explore.html" data-transition>&larr; Back to map</a>
-    <span class="article-nav-title">Guides</span>
+    <span class="article-nav-title">The Neural Jungle</span>
     <a href="beginners-guide.html" data-transition>Start reading &rarr;</a>
   </nav>
 
   <main class="article">
 
-    <!-- Header -->
-    <header class="guides-header">
-      <span class="article-breadcrumb">
-        <a href="explore.html" data-transition>The Neural Jungle</a> / Guides
-      </span>
-      <h1>Navigate the Neural Jungle</h1>
-      <p class="subtitle">Your brain is a living wilderness &mdash; billions of neural pathways winding like roots through layers of habit, memory, and instinct. Psychedelics appear to open clearings in that landscape. We&rsquo;re here to help you understand the science, weigh the risks, and decide what the research means for you.</p>
-      <div class="guides-cta">
-        <a href="beginners-guide.html" data-transition>Start with the Science</a>
-        <a href="depression-anxiety.html" data-transition>I&rsquo;m Exploring for Mental Health</a>
+    <!-- Hero -->
+    <section class="guides-hero">
+      <div class="guides-hero-bg">
+        <canvas data-scene="hero-rainforest"></canvas>
       </div>
-    </header>
+      <div class="guides-hero-overlay"></div>
+      <div class="guides-hero-content">
+        <span class="article-breadcrumb">
+          <a href="explore.html" data-transition>The Neural Jungle</a> / Guides
+        </span>
+        <h1>Navigate the Neural Jungle</h1>
+        <p class="subtitle">Your brain is a living wilderness &mdash; billions of neural pathways winding like roots through layers of habit, memory, and instinct. Psychedelics appear to open clearings in that landscape.</p>
+        <div class="guides-cta">
+          <a href="beginners-guide.html" data-transition>Start with the Science</a>
+          <a href="depression-anxiety.html" data-transition>I&rsquo;m Exploring for Mental Health</a>
+        </div>
+      </div>
+    </section>
 
     <div class="article-body">
-
-      <!-- Hero Image -->
-      <figure class="article-figure reveal">
-        <img src="assets/images/guides-hero-brain-rainforest.svg"
-             alt="Prompt: Dense tropical rainforest canopy from within, the trees and vines forming the unmistakable shape of a human brain. Bioluminescent neural pathways glow golden-green along the branches. Volumetric light rays pierce the canopy. Dark moody atmosphere, cinematic, 16:9">
-        <figcaption>The same branching architecture that shapes roots, rivers, and lightning also shapes your neural wiring. Your brain isn&rsquo;t a machine &mdash; it&rsquo;s a living ecology.</figcaption>
-      </figure>
 
       <!-- Intro Text -->
       <section class="reveal">
@@ -58,13 +57,11 @@
       <!-- Diptych -->
       <div class="image-diptych reveal">
         <div class="diptych-panel">
-          <img src="assets/images/guides-overgrown-trail.svg"
-               alt="Prompt: Dense overgrown jungle path choked with tangled vines and dark canopy, no light reaching the forest floor. Faint ghostly neural dendrite patterns visible in the vine tangles. Dark and oppressive atmosphere, cinematic">
+          <canvas data-scene="overgrown-trail"></canvas>
           <span class="diptych-caption">The well-worn rut &mdash; stuck patterns</span>
         </div>
         <div class="diptych-panel">
-          <img src="assets/images/guides-clearing-path.svg"
-               alt="Prompt: Clear forest path through tall trees with golden sunlight streaming through the canopy. Bioluminescent neural connections glow along the tree trunks and branches. Hopeful and expansive atmosphere, cinematic">
+          <canvas data-scene="clearing-path"></canvas>
           <span class="diptych-caption">New growth &mdash; after disruption</span>
         </div>
       </div>
@@ -75,15 +72,18 @@
       </section>
 
       <!-- Quote -->
-      <div class="attributed-quote reveal">
-        <blockquote>&ldquo;Psychedelics relax the precision of prior beliefs, allowing the brain to explore patterns it normally suppresses.&rdquo;</blockquote>
-        <cite>&mdash; Robin Carhart-Harris, Relaxed Beliefs Under Psychedelics (REBUS) model</cite>
+      <div class="canvas-quote reveal">
+        <canvas data-scene="jungle-neurons"></canvas>
+        <div class="canvas-quote-overlay"></div>
+        <div class="canvas-quote-content">
+          <blockquote>&ldquo;Psychedelics relax the precision of prior beliefs, allowing the brain to explore patterns it normally suppresses.&rdquo;</blockquote>
+          <cite>&mdash; Robin Carhart-Harris, Relaxed Beliefs Under Psychedelics (REBUS) model</cite>
+        </div>
       </div>
 
       <!-- Canopy Image -->
       <figure class="article-figure reveal">
-        <img src="assets/images/guides-canopy-light.svg"
-             alt="Prompt: Sunlight streaming through dense jungle canopy onto a moss-covered forest floor. Glowing golden neural pathway patterns trace along the light beams and tree roots. Ethereal, atmospheric, cinematic 16:9">
+        <canvas data-scene="canopy-light"></canvas>
         <figcaption>Disruption as renewal: like light flooding a forest floor after a clearing, psychedelics create space for dormant neural connections to grow.</figcaption>
       </figure>
 
@@ -145,40 +145,58 @@
 
     <div class="guide-cards reveal">
       <a href="beginners-guide.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 01</span>
-        <span class="guide-card-title">The Beginner&rsquo;s Guide</span>
-        <span class="guide-card-desc">What psychedelics are, how they work, a field guide to the major substances, and the essentials of set and setting.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="jungle-neurons"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 01</span>
+          <span class="guide-card-title">The Beginner&rsquo;s Guide</span>
+          <span class="guide-card-desc">What psychedelics are, how they work, a field guide to the major substances, and the essentials of set and setting.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
       <a href="depression-anxiety.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 02</span>
-        <span class="guide-card-title">Depression &amp; Anxiety</span>
-        <span class="guide-card-desc">What the research shows about psilocybin, MDMA, and ketamine for mental health &mdash; the promising findings and honest limitations.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="clearing-light"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 02</span>
+          <span class="guide-card-title">Depression &amp; Anxiety</span>
+          <span class="guide-card-desc">What the research shows about psilocybin, MDMA, and ketamine for mental health &mdash; the promising findings and honest limitations.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
       <a href="creativity-focus.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 03</span>
-        <span class="guide-card-title">Creativity &amp; Focus</span>
-        <span class="guide-card-desc">The science of psychedelics and cognitive flexibility &mdash; divergent thinking, problem-solving, and lifting the veil.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="morning-forest"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 03</span>
+          <span class="guide-card-title">Creativity &amp; Focus</span>
+          <span class="guide-card-desc">The science of psychedelics and cognitive flexibility &mdash; divergent thinking, problem-solving, and lifting the veil.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
       <a href="microdosing.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 04</span>
-        <span class="guide-card-title">Microdosing</span>
-        <span class="guide-card-desc">Protocols, evidence, and safety. What the science shows, what it doesn&rsquo;t, and what it means to tend the jungle at the subtlest level.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="tending"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 04</span>
+          <span class="guide-card-title">Microdosing</span>
+          <span class="guide-card-desc">Protocols, evidence, and safety. What the science shows, what it doesn&rsquo;t, and what it means to tend the jungle at the subtlest level.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
       <a href="safety-risks.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 05</span>
-        <span class="guide-card-title">Safety &amp; Risks</span>
-        <span class="guide-card-desc">Contraindications, medication interactions, challenging experiences, and harm reduction basics.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="maintained-trail"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 05</span>
+          <span class="guide-card-title">Safety &amp; Risks</span>
+          <span class="guide-card-desc">Contraindications, medication interactions, challenging experiences, and harm reduction basics.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
       <a href="legal-status.html" class="guide-card" data-transition>
-        <span class="guide-card-number">Guide 06</span>
-        <span class="guide-card-title">Legal Status</span>
-        <span class="guide-card-desc">The federal and state legal landscape for psychedelics as of 2026 &mdash; what&rsquo;s legal, what&rsquo;s decriminalized, and what&rsquo;s coming.</span>
-        <span class="guide-card-link">Read guide &rarr;</span>
+        <div class="guide-card-image"><canvas data-scene="aerial-forest"></canvas></div>
+        <div class="guide-card-content">
+          <span class="guide-card-number">Guide 06</span>
+          <span class="guide-card-title">Legal Status</span>
+          <span class="guide-card-desc">The federal and state legal landscape for psychedelics as of 2026 &mdash; what&rsquo;s legal, what&rsquo;s decriminalized, and what&rsquo;s coming.</span>
+          <span class="guide-card-link">Learn more &rarr;</span>
+        </div>
       </a>
     </div>
 
@@ -198,5 +216,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/scene-canvas.js"></script>
 </body>
 </html>

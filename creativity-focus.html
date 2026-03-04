@@ -7,7 +7,7 @@
   <meta name="description" content="The science of psychedelics and cognitive flexibility — divergent thinking, problem-solving, and lifting the veil.">
   <meta property="og:title" content="Creativity & Focus — The Neural Jungle">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#141e18">
+  <meta name="theme-color" content="#1a1a14">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 
   <nav class="article-nav">
     <a href="guides.html" data-transition>&larr; All Guides</a>
-    <span class="article-nav-title">Guide 03</span>
+    <span class="article-nav-title">The Neural Jungle</span>
     <a href="microdosing.html" data-transition>Next guide &rarr;</a>
   </nav>
 
@@ -41,8 +41,7 @@
       <h2 class="reveal">Why We Get Stuck</h2>
 
       <figure class="article-figure reveal">
-        <img src="assets/images/creativity-fog-forest.svg"
-             alt="Prompt: Dense fog blanketing a tropical jungle, obscuring the trees and trails beyond. Only the nearest branches are visible, with faint ghostly neural pathway outlines dissolving into the mist. Mysterious, claustrophobic, cinematic 16:9">
+        <canvas data-scene="fog-forest"></canvas>
         <figcaption>The fog: when the brain&rsquo;s efficiency kills its capacity for surprise, the rest of the landscape disappears. Awe is the first thing lost.</figcaption>
       </figure>
 
@@ -61,13 +60,11 @@
 
       <div class="image-diptych reveal">
         <div class="diptych-panel">
-          <img src="assets/images/creativity-looking-up.svg"
-               alt="Prompt: Looking straight up into a tropical forest canopy from below, seeing intricate branching patterns of trees against bright sky. The branches form neural dendrite patterns with golden bioluminescent nodes at branch points. Expansive, awe-inspiring, cinematic">
+          <canvas data-scene="looking-up"></canvas>
           <span class="diptych-caption">Canopy opening &mdash; new light</span>
         </div>
         <div class="diptych-panel">
-          <img src="assets/images/creativity-looking-down.svg"
-               alt="Prompt: Looking down at tangled jungle vines and dark undergrowth on a forest floor. The vines form repetitive loop patterns suggesting neural ruts. Low light, constrained feeling, cinematic">
+          <canvas data-scene="looking-down"></canvas>
           <span class="diptych-caption">Dense undergrowth &mdash; same ruts</span>
         </div>
       </div>
@@ -76,9 +73,13 @@
         <p>In practical terms, this manifests as what researchers and users describe in remarkably similar ways: unusual associations between ideas, the ability to see familiar problems from entirely new angles, a loosening of assumptions you didn&rsquo;t realize you held, enhanced pattern recognition, and a sense that the boundaries between categories &mdash; between disciplines, between self and work, between the problem and the solution &mdash; have become more porous.</p>
       </section>
 
-      <div class="attributed-quote reveal">
-        <blockquote>&ldquo;Psychedelics appear to flatten the brain&rsquo;s &lsquo;energy landscape,&rsquo; making it easier for cognition to move between states rather than getting trapped in attractors.&rdquo;</blockquote>
-        <cite>&mdash; Cognitive flexibility research, Imperial College London</cite>
+      <div class="canvas-quote reveal">
+        <canvas data-scene="clearing-light"></canvas>
+        <div class="canvas-quote-overlay"></div>
+        <div class="canvas-quote-content">
+          <blockquote>&ldquo;Psychedelics appear to flatten the brain&rsquo;s &lsquo;energy landscape,&rsquo; making it easier for cognition to move between states rather than getting trapped in attractors.&rdquo;</blockquote>
+          <cite>&mdash; Cognitive flexibility research, Imperial College London</cite>
+        </div>
       </div>
 
       <!-- Creativity Research -->
@@ -103,8 +104,7 @@
       <h2 class="reveal">Microdosing for Focus and Flow</h2>
 
       <figure class="article-figure reveal">
-        <img src="assets/images/creativity-morning-forest.svg"
-             alt="Prompt: Early morning tropical forest with soft golden light filtering through mist between tall trees. Delicate bioluminescent neural filaments are visible in the morning air like floating spider silk. Subtle, ethereal clarity, cinematic 16:9">
+        <canvas data-scene="morning-forest"></canvas>
         <figcaption>Morning light: microdosers describe not altered perception, but a quiet lifting of fog &mdash; familiar terrain seen with fresh eyes.</figcaption>
       </figure>
 
@@ -162,5 +162,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/scene-canvas.js"></script>
 </body>
 </html>
